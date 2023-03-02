@@ -12,13 +12,14 @@ namespace KeepCheeseForMouse {
         public CheeseObject cheeseObject;
         public ListTriggerControl triggerControl;
         public StateControl stateControl;
-        public GameController gameController;
-
         public DeathManager deathManager;
+        
+        public GameController gameController;
 
         public GameObject endMouse;
         public Animator animator;
         public ParticleSystem finishEffect;
+        
         public enum States {
             Idle,
             Running,
