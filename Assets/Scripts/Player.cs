@@ -6,7 +6,6 @@ using UnityEngine;
 namespace KeepCheeseForMouse {
     public class Player : MonoBehaviour {
         private const string _playerTag = "Player";
-        public bool burned = false;
 
         public MovementModule movementModule;
         public StackManager stackManager;
@@ -15,7 +14,7 @@ namespace KeepCheeseForMouse {
         public StateControl stateControl;
         public GameController gameController;
 
-        public HealthManager deathManager;
+        public DeathManager deathManager;
 
         public GameObject endMouse;
         public Animator animator;
@@ -29,6 +28,8 @@ namespace KeepCheeseForMouse {
             FailFinish
         }
         public States state;
+
+        public bool burned = false;
         void Start() {
             movementModule.Init(this);
             stackManager.Init(this);
@@ -140,7 +141,6 @@ namespace KeepCheeseForMouse {
                         player.animator.SetBool("Running", false);
                         cheeseList.Add(cheeseObject);
                         cheeseObject.OnTriggerEntered += player.triggerControl.OnCheeseTriggerEnter;
-                        // yeni eleman eklendikçe sondan baþlayýp hepsini yukarý aþaðý yap.?
                     }
                 }
             }
@@ -229,7 +229,6 @@ namespace KeepCheeseForMouse {
                     var lastCheese = player.stackManager.cheeseList[player.stackManager.cheeseList.Count - 1].gameObject;
                     lastCheese.GetComponent<Rigidbody>().AddForce(new Vector3(150, 0, 0));
                     player.stackManager.Remove(player.stackManager.cheeseList[player.stackManager.cheeseList.Count - 1]);
-                    // çarpan objeyi burda removelamam mümkün mü?
                 }
 
             }
@@ -270,7 +269,7 @@ namespace KeepCheeseForMouse {
                 }
             }
         }
-        public struct HealthManager {
+        public struct DeathManager {
             Player player;
             public bool canDeath;
             public void Init(Player p) {
